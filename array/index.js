@@ -5,7 +5,7 @@
 class myArray {
   constructor (capacity = 10) {
     let size = 0
-    const data = new Array(capacity)
+    let data = new Array(capacity)
 
     // 获取数组长度
     this.getSize = () => {
@@ -14,7 +14,7 @@ class myArray {
 
     // 获取数组容量
     this.getCapacity = () => {
-      return capacity
+      return data.length
     }
 
     // 数组是否为空
@@ -33,6 +33,11 @@ class myArray {
         return
       }
 
+      // 如果数组已满则进行扩容
+      if (size === data.length) {
+        resize(data.length * 2)
+      }
+
       for (let i = size - 1; i >= index; i--) {
         data[i + 1] = data[i]
       }
@@ -49,6 +54,17 @@ class myArray {
     // 添加首元素
     this.addFirst = (val) => {
       this.add(0, val)
+    }
+
+    // 对数组进行扩容或者缩容
+    let resize = (cap) => {
+      const arr = new Array(cap)
+
+      for (let i = 0; i < size; i++) {
+        arr[i] = data[i]
+      }
+
+      data = arr
     }
 
     // 打印输出
@@ -111,6 +127,11 @@ class myArray {
     this.remove = (index) => {
       if (index < 0 || index >= size) {
         new Error('索引错误，index必须大于0且小于size')
+      }
+
+      // 当数组长度只有容量的四分之一时，缩容一半
+      if (size === parseInt(data.length/4) && data.length >= 2) {
+        resize(parseInt(data.length/2))
       }
   
       for (let i = index + 1; i < size; i++) {

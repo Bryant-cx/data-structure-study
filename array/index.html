@@ -9,19 +9,21 @@
 <body>
   <script src="./index.js"></script>
   <script>
-  const arr = new myArray(20)
+  const arr = new myArray(5)
 
   for (let i=0; i< 10; i++) {
     arr.addLast(i)
+
+    if (i%3 === 0) {
+      console.log('size: ' + arr.getSize() + ' ; capacity: ' + arr.getCapacity())
+    }
   }
 
-  console.log(arr.toString())
+  for (let i=0; i< 10; i++) {
+    arr.removeLast(i)
 
-  arr.addFirst(-1)
-  console.log(arr.toString())
-
-  arr.add (1, 100)
-  console.log(arr.toString())
+    console.log('size: ' + arr.getSize() + ' ; capacity: ' + arr.getCapacity())
+  }
   </script>
 </body>
 </html>
