@@ -143,11 +143,17 @@ class myArray {
 
     // 删除首元素
     this.removeFirst = () => {
+      if (this.isEmpty()) {
+        new Error('数组为空，不能执行删除操作')
+      }
       this.remove(0)
     }
 
     // 删除末尾元素
     this.removeLast = () => {
+      if (this.isEmpty()) {
+        new Error('数组为空，不能执行删除操作')
+      }
       this.remove(size - 1)
     }
 
