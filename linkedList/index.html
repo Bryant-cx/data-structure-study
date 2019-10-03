@@ -7,6 +7,21 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script src="./index.js"></script>
+  <script>
+    const linkedList = new LinkedList()
+
+    for (let i = 0; i < 5; i++) {
+      linkedList.addFirst(i)
+      console.log(linkedList.toString())
+    }
+
+    linkedList.add(2, 666)
+    console.log(linkedList.toString())
+
+    console.log(linkedList.getFirst())
+    console.log(linkedList.get(2))
+    console.log(linkedList.getLast())
+  </script>
 </body>
 </html>
