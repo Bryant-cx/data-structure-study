@@ -7,21 +7,21 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="./index.js"></script>
+  <script src="./linkedListQueue.js"></script>
   <script>
-    const linkedList = new LinkedList()
-
-    for (let i = 0; i < 5; i++) {
-      linkedList.addFirst(i)
-      console.log(linkedList.toString())
-    }
-
-    linkedList.add(2, 666)
+    const linkedList = new LinkedListQueue()
     console.log(linkedList.toString())
 
-    console.log(linkedList.getFirst())
-    console.log(linkedList.get(2))
-    console.log(linkedList.getLast())
+    for (let i = 0; i < 15; i++) {
+      linkedList.enQueue(i)
+      console.log(linkedList.toString())
+
+      if (i%3 === 2) {
+        linkedList.deQueue()
+        console.log(linkedList.toString())
+      }
+    }
+    console.log(linkedList.getFront())
   </script>
 </body>
 </html>

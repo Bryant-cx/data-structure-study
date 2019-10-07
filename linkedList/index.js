@@ -119,5 +119,31 @@ class LinkedList {
 
       return res + 'NULL'
     }
+
+    // 删除元素
+    this.remove = (index) => {
+      let prev = dummyHead
+
+      for (let i = 0; i < index; i++) {
+        prev = prev.next
+      }
+
+      const node = prev.next
+      prev.next = node.next
+      node.next = null
+      size--
+
+      return node.val
+    }
+
+    // 删除首元素
+    this.removeFirst = () => {
+      return this.remove(0)
+    }
+
+    // 删除尾元素
+    this.removeLast = () => {
+      return this.remove(size - 1)
+    }
   }
 }
