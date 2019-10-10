@@ -59,3 +59,15 @@ var removeElements2 = function(head, val) {
 
     return dummyHead.next
 };
+
+/**
+ * 使用递归
+ */
+var removeElements3 = function(head, val) {
+  if (!head) {
+    return null
+  }
+  head.next = removeElements3(head.next, val)
+
+  return head.val === val ? head.next : head
+};
