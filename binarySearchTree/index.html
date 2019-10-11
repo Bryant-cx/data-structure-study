@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./index.js"></script>
+
+  <script>
+  const bst = new BinarySearchTree()
+  const arr = [5, 3, 6, 8, 4, 2]
+
+  arr.forEach(i => {
+    bst.add(i)
+  })
+
+  console.log('前序遍历')
+  bst.preOrder()
+  console.log('中序遍历')
+  bst.inOrder()
+  console.log('后序遍历')
+  bst.postOrder()
+  </script>
+</body>
+</html>

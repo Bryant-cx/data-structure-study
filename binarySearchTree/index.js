@@ -40,19 +40,85 @@ class BinarySearchTree {
       // 非递归写法
     }
 
-    function addNode(root, val) {
-      if (!root) {
+    function addNode(node, val) {
+      if (!node) {
         size++
         return new Node(val)
       }
 
-      if (val < root.val) {
-        root.left = addNode(root.left, val)
-      } else if (val > root.val) {
-        root.right = addNode(root.right, val)
+      if (val < node.val) {
+        node.left = addNode(node.left, val)
+      } else if (val > node.val) {
+        node.right = addNode(node.right, val)
       }
 
-      return root
+      return node
+    }
+
+    // 是否包含某元素
+    this.contains = (val) => {
+      return ifContains(root, val)
+    }
+
+    function ifContains (node, val) {
+      if (!node) return false
+
+      if (node.val === val) {
+        return true
+      }
+
+      if (val < node.val) {
+        return ifContains(node.left, val)
+      }
+
+      if (val > node.val) {
+        return ifContains(node.right, val)
+      }
+    }
+
+    // 前序遍历
+    this.preOrder = () => {
+      preOrderFunc(root)
+    }
+
+    function preOrderFunc (node) {
+      if (!node) {
+        return
+      }
+
+      console.log(node.val)
+      preOrderFunc(node.left)
+      preOrderFunc(node.right)
+    }
+
+    // 中序遍历
+    this.inOrder = () => {
+      inOrderFunc(root)
+    }
+
+    function inOrderFunc (node) {
+      if (!node) {
+        return
+      }
+
+      inOrderFunc(node.left)
+      console.log(node.val)
+      inOrderFunc(node.right)
+    }
+
+    // 后续遍历
+    this.postOrder = () => {
+      postOrderFunc(root)
+    }
+
+    function postOrderFunc (node) {
+      if (!node) {
+        return
+      }
+
+      postOrderFunc(node.left)
+      postOrderFunc(node.right)
+      console.log(node.val)
     }
   }
 }
