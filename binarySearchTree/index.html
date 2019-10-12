@@ -11,11 +11,31 @@
 
   <script>
   const bst = new BinarySearchTree()
-  const arr = [5, 3, 6, 8, 4, 2]
+  // const arr = [5, 3, 6, 8, 4, 2]
 
-  arr.forEach(i => {
-    bst.add(i)
-  })
+  // arr.forEach(i => {
+  //   bst.add(i)
+  // })
+
+  for (let i = 0; i < 100; i++) {
+    const num = Math.ceil(Math.random() * 200)
+    bst.add(num)
+  }
+
+  const arr = []
+  const size = bst.getSize()
+  for (let i = 0; i < size; i++) {
+    // arr.push(bst.removeMin())
+    arr.push(bst.removeMax())
+  }
+
+  console.log(arr)
+
+  for (let j = 1; j < arr.length; j++) {
+    if (arr[j] > arr[j - 1]) {
+      console.log('some error')
+    }
+  }
 
   // console.log('前序遍历')
   // bst.preOrder()
@@ -26,8 +46,8 @@
   // console.log('后序遍历')
   // bst.postOrder()
 
-  console.log('前序遍历')
-  bst.levelOrder()
+  // console.log('前序遍历min', bst.getMin())
+  // console.log('前序遍历max', bst.getMax())
   </script>
 </body>
 </html>

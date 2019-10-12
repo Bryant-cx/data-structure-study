@@ -167,5 +167,99 @@ class BinarySearchTree {
         }
       }
     }
+
+    // 查询二分搜索树的最小值
+    this.getMin = () => {
+      if (size === 0) {
+        throw Error('BST is empty')
+      }
+
+      return getMinFunc(root)
+
+      // 非递归写法
+      // let cur = root
+      // while (cur) {
+      //   if (!cur.left) {
+      //     return cur.val
+      //   }
+
+      //   cur = cur.left
+      // }
+    }
+
+    function getMinFunc (node) {
+      if (!node.left) {
+        return node.val
+      }
+
+      return getMinFunc(node.left)
+    }
+
+    // 查询二分搜索树的最大值
+    this.getMax = () => {
+      if (size === 0) {
+        throw Error('BST is empty')
+      }
+
+      return getMaxFunc(root)
+
+      // 非递归写法
+      // let cur = root
+      // while (cur) {
+      //   if (!cur.right) {
+      //     return cur.val
+      //   }
+
+      //   cur = cur.right
+      // }
+    }
+
+    function getMaxFunc (node) {
+      if (!node.right) {
+        return node.val
+      }
+
+      return getMaxFunc(node.right)
+    }
+
+    // 删除二分搜索树的最小值
+    this.removeMin = () => {
+      const min = this.getMin()
+
+      root = removeMinFunc(root)
+      return min
+    }
+
+    function removeMinFunc (node) {
+      if (!node.left) {
+        const rightNode = node.right
+        node.right = null
+        size--
+        return rightNode
+      }
+
+      node.left = removeMinFunc(node.left)
+      return node
+    }
+
+    // 删除二分搜索树的最大值
+    this.removeMax = () => {
+      const max = this.getMax()
+
+      root = removeMaxFunc(root)
+      return max
+    }
+
+    function removeMaxFunc (node) {
+      if (!node.right) {
+        const leftNode = node.left
+        node.left = null
+        size--
+        return leftNode
+      }
+
+      node.right = removeMaxFunc(node.right)
+      return node
+    }
   }
 }
