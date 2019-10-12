@@ -120,5 +120,29 @@ class BinarySearchTree {
       postOrderFunc(node.right)
       console.log(node.val)
     }
+
+    // 前序遍历的非递归写法
+    this.preOrderNR = () => {
+      const stack = [root]
+      let cur = root
+
+      while(stack.length > 0) {
+        const node = stack.pop()
+
+        if (!node) {
+          return
+        }
+
+        console.log(node.val)
+
+        if (node.right) {
+          stack.push(node.right)
+        }
+
+        if (node.left) {
+          stack.push(node.left)
+        }
+      }
+    }
   }
 }
