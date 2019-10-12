@@ -144,5 +144,28 @@ class BinarySearchTree {
         }
       }
     }
+
+    // 层序遍历
+    this.levelOrder = () => {
+      const queue = [root]
+
+      while (queue.length > 0) {
+        const node = queue.shift()
+
+        if (!node) {
+          return
+        }
+
+        console.log(node.val)
+
+        if (node.left) {
+          queue.push(node.left)
+        }
+
+        if (node.right) {
+          queue.push(node.right)
+        }
+      }
+    }
   }
 }
