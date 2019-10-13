@@ -261,5 +261,43 @@ class BinarySearchTree {
       node.right = removeMaxFunc(node.right)
       return node
     }
+
+    // 删除二分搜索树的任意节点
+    this.remove = (val) => {
+      if (size === 0) {
+        throw Error('BST is empty')
+      }
+
+      root = removeElement(root, val)
+    }
+
+    function removeElement(node, val) {
+      if (val < node.val) {
+        node.left = removeElement(node.left, val)
+        return node
+      }
+
+      if (val > node.val) {
+        node.right = removeElement(node.right, val)
+        return node
+      }
+
+      if (!node.left) {
+        size--
+        return node.right
+      }
+
+      if (!node.right) {
+        size--
+        return node.left
+      }
+
+      const min = getMinFunc(node.right)
+      const res = new Node(min)
+      res.left = node.left
+      res.right = removeMinFunc(node.right)
+      node.left = node.right = null
+      return res
+    }
   }
 }
