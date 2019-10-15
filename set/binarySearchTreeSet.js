@@ -74,12 +74,13 @@ class BSTSet {
         return node
       }
 
-      size--
       if (!node.left) {
+        size--
         return node.right
       }
 
       if (!node.right) {
+        size--
         return node.left
       }
 
