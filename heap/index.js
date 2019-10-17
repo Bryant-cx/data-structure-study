@@ -4,14 +4,40 @@
  *        leftChildIndex --> 1       2   <-- rightChildIndex
  *                         /   \   /    \
  *                        3     4 5      6
+ * 
+ *  @param isHeapify 是否以heapify方式生成最大堆
+ *  @param arr heapify方式生成最大堆的源数组
  */
 class Heap {
-  constructor (capacity) {
-    const data = new Arr(capacity)
+  constructor (isHeapify = false, arr = []) {
+    const data = new Arr(isHeapify, arr)
 
     // 堆中元素个数
     this.getSize = () => {
       return data.getSize()
+    }
+
+    /**
+    * @param {*} index 子节点的索引
+    * 从上面的注释可以看出，父节点的索引 parentIndex = (childIndex + 1) / 2 - 1
+    */
+    this.getParentIndex = (index) => {
+      if (index === 0) {
+        throw Error('MaxIndex has no parent index')
+      }
+
+      return parseInt((index + 1) / 2) - 1
+    }
+
+    // 取出堆中的最大元素，替换为一个新的元素
+    // 直接替换掉最大值，然后执行下沉操作
+    this.replace = (val) => {
+      const res = data.get(this.getSize() - 1)
+
+      data.set(0, val)
+      this.siftDown(0)
+
+      return res
     }
 
     // 堆是否为空
@@ -36,18 +62,6 @@ class Heap {
     }
 
     /**
-     * @param {*} index 子节点的索引
-     * 从上面的注释可以看出，父节点的索引 parentIndex = (childIndex + 1) / 2 - 1
-     */
-    this.getParentIndex = (index) => {
-      if (index === 0) {
-        throw Error('MaxIndex has no parent index')
-      }
-
-      return parseInt((index + 1) / 2) - 1
-    }
-
-    /**
      * 入堆
      * @param {*} val 
      * 直接添加到数组末尾然后进行上浮
@@ -55,7 +69,7 @@ class Heap {
     this.add = (val) => {
       data.addLast(val)
       if (this.getSize() > 1) {
-        this.siftUp(this.getSize())
+        this.siftUp(this.getSize() - 1)
       }
     }
 
@@ -64,12 +78,9 @@ class Heap {
      * 与它的父节点进行对比，如果比父节点大则交换二者的值
      */
      this.siftUp = (index) => {
-      let parentIndex = this.getParentIndex(index)
-
-      while (data[index] > data[parentIndex]) {
-        data.swap(index, parentIndex)
-        index = parentIndex
-        parentIndex = this.getParentIndex(index)
+      while (index > 0 && data.get(index) > data.get(this.getParentIndex(index))) {
+        data.swap(index, this.getParentIndex(index))
+        index = this.getParentIndex(index)
       }
     }
 
@@ -82,8 +93,9 @@ class Heap {
       if (this.getSize() === 0) {
         throw Error('Heap is empty')
       }
-      const res = data[0]
-      data[0] = data[this.getSize() - 1]
+      const res = data.get(0)
+      data.set(0, data.get(this.getSize() - 1))
+      data.removeLast()
 
       this.siftDown(0)
       return res
@@ -95,14 +107,26 @@ class Heap {
      */
     this.siftDown = (index) => {
       let leftChildIndex = this.getLeftChildIndex(index)
+      let size = this.getSize()
 
-      while (leftChildIndex < this.getSize() && data[index] < data[leftChildIndex]) {
-        if (leftChildIndex + 1 < this.getSize() && data[leftChildIndex] < data[leftChildIndex + 1]) {
+      while (leftChildIndex < size) {
+        if (leftChildIndex + 1 < size && data.get(leftChildIndex) < data.get(leftChildIndex + 1)) {
           leftChildIndex++
         }
-        data.swap(index, leftChildIndex)
-        index = leftChildIndex
-        leftChildIndex = this.getLeftChildIndex(leftChildIndex)
+        if (data.get(index) < data.get(leftChildIndex)) {
+          data.swap(index, leftChildIndex)
+          index = leftChildIndex
+          leftChildIndex = this.getLeftChildIndex(leftChildIndex)
+        } else {
+          return
+        }
+      }
+    }
+
+    // 以heapify方式生成最大堆，以第一个非叶子节点为起点直到根节点，分别执行下沉操作
+    if (isHeapify) {
+      for (let i = this.getParentIndex(this.getSize() - 1); i >= 0; i--) {
+        this.siftDown(i)
       }
     }
   }

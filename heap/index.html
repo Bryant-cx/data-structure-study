@@ -12,23 +12,30 @@
   <script>
     const heap = new Heap()
     const arr = []
-    const num = 10000
+    const source = []
+    const num = 10
 
     for (let i = 0; i < num; i++) {
-      heap.add(Math.ceil(Math.random() * 10000))
+      let temp = Math.ceil(Math.random() * 100)
+      heap.add(temp)
+      source.push(temp)
     }
+
+    console.log(source)
+    
+    // const heap = new Heap(true, source)
 
     for (let i = 0; i < num; i++) {
       arr[i] = heap.extract()
     }
+
+    console.log(arr)
 
     for (let i = 0; i < num - 1; i++) {
       if (arr[i] < arr[i + 1]) {
         throw Error('Error')
       }
     }
-
-    console.log('the heap is OK')
   </script>
 </body>
 </html>

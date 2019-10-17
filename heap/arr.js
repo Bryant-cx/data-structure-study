@@ -1,12 +1,25 @@
 class Arr {
-  constructor (capacity = 20) {
-    let data = new Array(capacity)
+  constructor (isHeapify = false, arr = [], capacity = 10) {
+    let cap = capacity > arr.length ? capacity : arr.length
+    let data = new Array(cap)
     let size = 0
-    let cap = capacity
+
+    if (isHeapify) {
+      for (let i = 0; i < arr.length; i++) {
+        data[i] = arr[i]
+      }
+      size = arr.length
+      console.log('init', data)
+    }
 
     // 获取数组长度
     this.getSize = () => {
       return size
+    }
+
+    // 获取元素索引index的值
+    this.get = (index) => {
+      return data[index]
     }
 
     // 数组是否为空
@@ -48,7 +61,7 @@ class Arr {
         throw Error('Invalid index')
       }
 
-      for (let i = index; i < size - 1; i++) {
+      for (let i = index; i < size; i++) {
         data[i] = data[i + 1] 
         size--
       }
@@ -60,6 +73,16 @@ class Arr {
       }
     }
 
+    // 删去最后一个元素
+    this.removeLast = () => {
+      this.remove(size - 1)
+    }
+
+    // 设置数组元素的值
+    this.set = (index, val) => {
+      data[index] = val
+    }
+
     // 交换两个元素的值
     this.swap = (i, j) => {
       if (i < 0 || i > size - 1 || j < 0 || j > size - 1) {
@@ -69,6 +92,9 @@ class Arr {
       let temp = data[i]
       data[i] = data[j]
       data[j] = temp
+      console.log('swap', i, j, data)
+      console.log('data[i]', data[i])
+      console.log('data[j]', data[j])
     }
 
     // 调整数组容量 
