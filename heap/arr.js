@@ -92,9 +92,6 @@ class Arr {
       let temp = data[i]
       data[i] = data[j]
       data[j] = temp
-      console.log('swap', i, j, data)
-      console.log('data[i]', data[i])
-      console.log('data[j]', data[j])
     }
 
     // 调整数组容量 

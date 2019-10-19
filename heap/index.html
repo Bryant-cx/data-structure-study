@@ -13,29 +13,35 @@
     const heap = new Heap()
     const arr = []
     const source = []
-    const num = 10
+    const num = 1000000
+
+    const time1 = Date.parse(new Date())
+    for (let i = 0; i < num; i++) {
+      heap.add(Math.ceil(Math.random() * 100))
+    }
+    const time2 = Date.parse(new Date())
+    console.log('no heapify', time2 - time1)
 
     for (let i = 0; i < num; i++) {
-      let temp = Math.ceil(Math.random() * 100)
-      heap.add(temp)
-      source.push(temp)
+      source.push(Math.ceil(Math.random() * 100))
     }
-
-    console.log(source)
     
-    // const heap = new Heap(true, source)
+    const time3 = Date.parse(new Date())
+    const heap1 = new Heap(true, source)
+    const time4 = Date.parse(new Date())
+    console.log('heapify', time4 - time3)
 
-    for (let i = 0; i < num; i++) {
-      arr[i] = heap.extract()
-    }
+    console.log(heap1)
 
-    console.log(arr)
+    // for (let i = 0; i < num; i++) {
+    //   arr[i] = heap.extract()
+    // }
 
-    for (let i = 0; i < num - 1; i++) {
-      if (arr[i] < arr[i + 1]) {
-        throw Error('Error')
-      }
-    }
+    // for (let i = 0; i < num - 1; i++) {
+    //   if (arr[i] < arr[i + 1]) {
+    //     throw Error('Error')
+    //   }
+    // }
   </script>
 </body>
 </html>
