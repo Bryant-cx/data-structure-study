@@ -95,5 +95,36 @@ class SegmentTree {
       const queryRight = queryFunc(rChildIndex, mid + 1, r, mid + 1, queryR)
       return callback(queryLeft, queryRight)
     }
+
+    // 更新线段树的值
+    this.set = (index, val) => {
+      if (index < 0 || index > data.length - 1) {
+        throw Error('Invalid index')
+      }
+
+      data[index] = val
+
+      setFunc(0, 0, data.length - 1, index, val)
+    }
+
+    // 在以treeIndex为根节点的[l, r]区间内生成节点树
+    function setFunc(treeIndex, l, r, setIndex, val) {
+      if (l === r) {
+        tree[treeIndex] = val
+        return
+      }
+
+      const mid = l + parseInt((r - l) / 2)
+      const lChildIndex = leftChildIndex(treeIndex)
+      const rChildIndex = rightChildIndex(treeIndex)
+
+      if (setIndex >= mid + 1) {
+        setFunc(rChildIndex, mid + 1, r, setIndex, val)
+      } else {
+        setFunc(lChildIndex, l, mid, setIndex, val)
+      }
+
+      tree[treeIndex] = callback(tree[lChildIndex], tree[rChildIndex])
+    }
   }
 }
