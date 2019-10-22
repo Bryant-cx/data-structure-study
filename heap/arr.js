@@ -9,7 +9,6 @@ class Arr {
         data[i] = arr[i]
       }
       size = arr.length
-      console.log('init', data)
     }
 
     // 获取数组长度

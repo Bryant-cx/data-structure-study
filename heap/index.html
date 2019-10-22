@@ -13,25 +13,25 @@
     const heap = new Heap()
     const arr = []
     const source = []
-    const num = 1000000
+    const num = 10000000
 
-    const time1 = Date.parse(new Date())
+    const time1 = (new Date()).getTime()
     for (let i = 0; i < num; i++) {
       heap.add(Math.ceil(Math.random() * 100))
     }
-    const time2 = Date.parse(new Date())
-    console.log('no heapify', time2 - time1)
+    const time2 = (new Date()).getTime()
+    console.log('no heapify', (time2 - time1)/1000)
 
     for (let i = 0; i < num; i++) {
       source.push(Math.ceil(Math.random() * 100))
     }
     
-    const time3 = Date.parse(new Date())
+    const time3 = (new Date()).getTime()
     const heap1 = new Heap(true, source)
-    const time4 = Date.parse(new Date())
-    console.log('heapify', time4 - time3)
+    const time4 = (new Date()).getTime()
+    console.log('heapify', (time4 - time3)/1000)
 
-    console.log(heap1)
+    // console.log(heap1)
 
     // for (let i = 0; i < num; i++) {
     //   arr[i] = heap.extract()

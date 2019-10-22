@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./quickFind.js"></script>
+  <script src="./quickUnion.js"></script>
+  <script src="./quickUnion2.js"></script>
+  <script src="./quickUnion3.js"></script>
+  <script src="./quickUnion4.js"></script>
+  <script src="./quickUnion5.js"></script>
+  <script>
+    function test (uf, m, size) {
+      const startTime = (new Date()).getTime()
+
+      for (let i = 0; i < m; i++) {
+        const a = Math.ceil(Math.random() * size) - 1
+        const b = Math.ceil(Math.random() * size) - 1
+        uf.union(a, b)
+      }
+
+      for (let i = 0; i < m; i++) {
+        const a = Math.ceil(Math.random() * size) - 1
+        const b = Math.ceil(Math.random() * size) - 1
+        uf.isConnected(a, b)
+      }
+
+      const endTime = (new Date()).getTime()
+      return (endTime - startTime) / 1000
+    }
+
+    const m = 10000000
+    const size = 10000000
+    // const uf1 = new UnionFind1(size)
+    // const uf2 = new UnionFind2(size)
+    const uf3 = new UnionFind3(size)
+    const uf4 = new UnionFind4(size)
+    const uf5 = new UnionFind5(size)
+    const uf6 = new UnionFind6(size)
+    // const time1 = test(uf1, m, size)
+    // console.log('执行quickFind用时', time1)
+    // const time2 = test(uf2, m, size)
+    // console.log('执行quickUnion用时', time2)
+    const time3 = test(uf3, m, size)
+    console.log('执行改良quickUnion用时', time3)
+    const time4 = test(uf4, m, size)
+    console.log('执行改良quickUnion用时', time4)
+    const time5 = test(uf5, m, size)
+    console.log('执行改良2quickUnion用时', time5)
+    const time6 = test(uf6, m, size)
+    console.log('执行改良2quickUnion用时', time6)
+  </script>
+</body>
+</html>
