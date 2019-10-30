@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./index.js"></script>
+  <script>
+    const avl = new AVLTree()
+    const num = 1000
+    const arr = []
+
+    // console.log(...new Set(arr))
+
+    for (let i = 0; i < num; i++) {
+      const val = Math.ceil(Math.random() * num)
+      // const val = arr[i]
+
+      arr.push(val)
+      if (avl.contains(val)) {
+        avl.add(val, avl.get(val) + 1)
+      } else {
+        avl.add(val, 1)
+      }
+    }
+
+    console.log('isBst', avl.isBST())
+    console.log('isBalanced', avl.isBalanced())
+    console.log(avl.getSize(), arr.length)
+
+    for (let i = 0; i < arr.length; i++) {
+      avl.remove(arr[i])
+
+      if (!avl.isBalanced() || !avl.isBST()) {
+        throw Error('error')
+      }
+    }
+
+    console.log(avl.getSize())
+  </script>
+</body>
+</html>
