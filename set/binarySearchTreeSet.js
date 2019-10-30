@@ -1,13 +1,12 @@
-class Node {
-  constructor (val = null) {
-    this.val = val
-    this.next = null
-    this.right = null
-  }
-}
-
 class BSTSet {
   constructor () {
+    class Node {
+      constructor (val = null) {
+        this.val = val
+        this.left = null
+        this.right = null
+      }
+    }
     let size = 0
     let root = null
 
@@ -28,13 +27,44 @@ class BSTSet {
 
     // 向集合中添加元素
     this.add = (val) => {
-      root = addElement(root, val)
+      // root = addElement(root, val)
+      if (!root) {
+        root = new Node(val)
+        size++
+        return
+      }
+
+      let cur = root
+      while (cur) {
+        if (val === cur.val) {
+          return
+        }
+
+        if (val < cur.val) {
+          if (cur.left) {
+            cur = cur.left
+          } else {
+            cur.left = new Node(val)
+            size++
+            return
+          }
+        } else {
+          if (cur.right) {
+            cur = cur.right
+          } else {
+            cur.right = new Node(val)
+            size++
+            return
+          }
+        }
+      }
     }
 
     // 删除集合中的元素
     this.remove = (val) => {
       if (this.isEmpty()) {
-        throw Error('Set is empty')
+        // throw Error('Set is empty')
+        return
       }
       root = removeElement(root, val)
     }

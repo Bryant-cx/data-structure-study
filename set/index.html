@@ -7,25 +7,61 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- <script src="./linkedListSet.js"></script> -->
+  <script src="./linkedListSet.js"></script>
+  <script src="./avlset.js"></script>
   <script src="./binarySearchTreeSet.js"></script>
   <script>
-  // const linkedListSet = new LinkedListSet()
+  const linkedListSet = new LinkedListSet()
   const bstset = new BSTSet()
-  // const arr = [1, 5, 3, 9, 2, 9, 0, 8, 0, 3]
-  const arr = [5, 3, 6, 8, 4, 2]
+  const avlset = new AVLSet()
+  const arr = []
+  const num = 100000
 
-  for (let i = 0; i < arr.length; i++) {
-    // linkedListSet.add(arr[i])
-    bstset.add(arr[i])
+  for (let i = 0; i < num; i++) {
+    const val = Math.ceil(Math.random() * num)
+    arr.push(val)
   }
 
-  console.log('size', bstset.getSize())
-  bstset.inOrder()
+  arr.sort()
+  // console.log(arr)
 
-  bstset.remove(3)
-  bstset.inOrder()
-  console.log('size', bstset.getSize())
+  // const time1 = (new Date()).getTime()
+  // for (let i = 0; i < arr.length; i ++) {
+  //   bstset.add(arr[i])
+  // }
+  // console.log(bstset.getSize())
+  // for (let i = 0; i < arr.length; i ++) {
+  //   bstset.remove(arr[i])
+  // }
+  // console.log(bstset.getSize())
+  // const time2 = (new Date()).getTime()
+  // console.log('bstset: ', (time2 - time1)/1000)
+
+  // const time3 = (new Date()).getTime()
+  // for (let i = 0; i < arr.length; i ++) {
+  //   linkedListSet.add(arr[i])
+  // }
+  // console.log(linkedListSet.getSize())
+  // for (let i = 0; i < arr.length; i ++) {
+  //   linkedListSet.remove(arr[i])
+  // }
+  // console.log(linkedListSet.getSize())
+  // const time4 = (new Date()).getTime()
+  // console.log('linkedListset: ', (time4 - time3)/1000)
+
+  const time5 = (new Date()).getTime()
+  for (let i = 0; i < arr.length; i ++) {
+    avlset.add(arr[i])
+  }
+  console.log(avlset.getSize())
+  for (let i = 0; i < arr.length; i ++) {
+    avlset.remove(arr[i])
+  }
+  console.log(avlset.getSize())
+  const time6 = (new Date()).getTime()
+  console.log('avlset: ', (time6 - time5)/1000)
+  console.log('isbst', avlset.isBST())
+  console.log('isBalanced', avlset.isBalanced())
   </script>
 </body>
 </html>
