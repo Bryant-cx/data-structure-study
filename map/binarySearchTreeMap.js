@@ -1,16 +1,16 @@
-class Node {
-  constructor (key = null, val = null) {
-    this.key = key
-    this.val = val
-    this.left = null
-    this.right = null
-  }
-}
-
 class BSTMap {
   constructor () {
     let size = 0
     let root = null
+
+    class Node {
+      constructor (key = null, val = null) {
+        this.key = key
+        this.val = val
+        this.left = null
+        this.right = null
+      }
+    }
 
     this.getSize = () => {
       return size
@@ -33,7 +33,8 @@ class BSTMap {
     // 删除元素
     this.remove = (key) => {
       if (this.isEmpty()) {
-        throw Error('map is empty')
+        // throw Error('map is empty')
+        return
       }
 
       root = removeElement(root, key)
@@ -75,15 +76,12 @@ class BSTMap {
 
       if (key < node.key) {
         node.left = putElement(node.left, key, val)
-        return node
-      }
-
-      if (key > node.key) {
+      } else if (key > node.key) {
         node.right = putElement(node.right, key, val)
-        return node
+      } else {
+        node.val = val
       }
 
-      node.val = val
       return node
     }
 

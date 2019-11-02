@@ -1,15 +1,15 @@
-class Node {
-  constructor (key = null, val = null) {
-    this.key = key
-    this.val = val
-    this.next = null
-  }
-}
-
 class LinkedListMap {
   constructor () {
     let head = null
     let size = 0
+
+    class Node {
+      constructor (key = null, val = null) {
+        this.key = key
+        this.val = val
+        this.next = null
+      }
+    }
 
     // 获取映射长度
     this.getSize = () => {
@@ -37,7 +37,7 @@ class LinkedListMap {
     }
 
     // 向集合中添加元素（key, val）
-    this.add = (key, val) => {
+    this.put = (key, val) => {
       if (!this.contains(key)) {
         const node = new Node(key, val)
         node.next = head
@@ -66,7 +66,8 @@ class LinkedListMap {
     // 删除集合中的元素key
     this.remove = (key) => {
       if (this.isEmpty()) {
-        throw Error('The map is empty')
+        // throw Error('The map is empty')
+        return
       }
 
       let dummyHead = new Node()
