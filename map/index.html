@@ -10,18 +10,20 @@
   <script src="./linkedListMap.js"></script>
   <script src="./binarySearchTreeMap.js"></script>
   <script src="./avlmap.js"></script>
+  <script src="./rbtreeMap.js"></script>
   <script>
-    const linkedListMap = new LinkedListMap()
-    const bstMap = new BSTMap()
+    // const linkedListMap = new LinkedListMap()
+    // const bstMap = new BSTMap()
     const avlmap = new AVLMap()
-    const num = 100000
+    const rbtreeMap = new RBTreeMap()
+    const num = 10000000
     const arr = []
 
     for (let i = 0; i < num; i++) {
       arr.push(Math.ceil(Math.random() * num))
     }
 
-    // arr.sort()
+    arr.sort()
 
     function test (map) {
       const time1 = (new Date()).getTime()
@@ -37,9 +39,10 @@
       return (time2 - time1) / 1000
     }
 
-    console.log('linkedListmap: ', test(linkedListMap))
-    console.log('bstmap:', test(bstMap))
+    // console.log('linkedListmap: ', test(linkedListMap))
+    // console.log('bstmap:', test(bstMap))
     console.log('avlmap: ', test(avlmap))
+    console.log('rbtreemap: ', test(rbtreeMap))
   </script>
 </body>
 </html>
