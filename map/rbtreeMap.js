@@ -185,8 +185,10 @@ class RBTreeMap {
 
       if (key < node.key) {
         node.left = remove(node.left, key)
+        return node
       } else if (key > node.key) {
         node.right = remove(node.right, key)
+        return node
       } else {
         if (!node.left) {
           const rightNode = node.right

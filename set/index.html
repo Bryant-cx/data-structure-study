@@ -10,12 +10,14 @@
   <script src="./linkedListSet.js"></script>
   <script src="./avlset.js"></script>
   <script src="./binarySearchTreeSet.js"></script>
+  <script src="./rbtreeSet.js"></script>
   <script>
   const linkedListSet = new LinkedListSet()
   const bstset = new BSTSet()
   const avlset = new AVLSet()
+  const rbset = new RBTreeSet()
   const arr = []
-  const num = 100000
+  const num = 10000000
 
   for (let i = 0; i < num; i++) {
     const val = Math.ceil(Math.random() * num)
@@ -23,45 +25,25 @@
   }
 
   arr.sort()
-  // console.log(arr)
+  function test (set) {
+    const time5 = (new Date()).getTime()
+    for (let i = 0; i < arr.length; i ++) {
+      set.add(arr[i])
+    }
+    // console.log(set.getSize())
+    for (let i = 0; i < arr.length; i ++) {
+      set.remove(arr[i])
+    }
+    // console.log(set.getSize())
+    const time6 = (new Date()).getTime()
 
-  // const time1 = (new Date()).getTime()
-  // for (let i = 0; i < arr.length; i ++) {
-  //   bstset.add(arr[i])
-  // }
-  // console.log(bstset.getSize())
-  // for (let i = 0; i < arr.length; i ++) {
-  //   bstset.remove(arr[i])
-  // }
-  // console.log(bstset.getSize())
-  // const time2 = (new Date()).getTime()
-  // console.log('bstset: ', (time2 - time1)/1000)
-
-  // const time3 = (new Date()).getTime()
-  // for (let i = 0; i < arr.length; i ++) {
-  //   linkedListSet.add(arr[i])
-  // }
-  // console.log(linkedListSet.getSize())
-  // for (let i = 0; i < arr.length; i ++) {
-  //   linkedListSet.remove(arr[i])
-  // }
-  // console.log(linkedListSet.getSize())
-  // const time4 = (new Date()).getTime()
-  // console.log('linkedListset: ', (time4 - time3)/1000)
-
-  const time5 = (new Date()).getTime()
-  for (let i = 0; i < arr.length; i ++) {
-    avlset.add(arr[i])
+    return (time6 - time5)/1000
   }
-  console.log(avlset.getSize())
-  for (let i = 0; i < arr.length; i ++) {
-    avlset.remove(arr[i])
-  }
-  console.log(avlset.getSize())
-  const time6 = (new Date()).getTime()
-  console.log('avlset: ', (time6 - time5)/1000)
-  console.log('isbst', avlset.isBST())
-  console.log('isBalanced', avlset.isBalanced())
+
+  // console.log('linkedlistset', test(linkedListSet))
+  // console.log('bstset', test(bstset))
+  console.log('avlset', test(avlset))
+  console.log('rbset', test(rbset))
   </script>
 </body>
 </html>
